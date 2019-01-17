@@ -6,6 +6,7 @@ import cl.accenture.programatufuturo.proyecto.model.Usuario;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,6 +20,40 @@ public class UsuarioDAO {
     public UsuarioDAO(Conexion conexion) throws SinConexionException{
 
         this.conexion = conexion;
+    }
+
+    // Almacenar Usuario, no retorna nada. Recibe un Usuario
+    public void almacenarUsuario (Usuario u) throws SinConexionException{
+        try{
+
+            // en mi SQL hago un INSERT TO, y VALUES, con signos de interrogacion en los valores de las columnas
+            // y a continuación les dadamos el valor
+            final String SQL = "INSERT INTO Usuario(id, nombre, email, contraseña, ultimoLogin, fechaNac, telefono, nacionalidad, rut, genero, rol_Id) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+
+            PreparedStatement ps = conexion.getConexion().prepareStatement(SQL);
+
+            // ingresamos los valores con Set, segun el lugar del signo,
+            // y un get de la respuesta recibida según corresponda
+
+
+            ps.setInt(1,u.getId());
+            ps.setString(2,u.getNombre());
+            ps.setString(3,u.getEmail());
+            ps.setString(4,u.getContraseña());
+            ps.setDate(5,(Date) u.getUltimoLogin());
+            ps.setDate(6,(Date) u.getFechaNac());
+            ps.setInt(7,u.getTelefono());
+            ps.setString(8,u.getNacionalidad());
+            ps.setString(9,u.getRut());
+            ps.setString(10,u.getGenero());
+            ps.setInt(11,u.getRol().getId());
+
+            // Ejecutamos el almacenamiento
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     // Login para ingresar, retorna un boolean, recibe un Usuario

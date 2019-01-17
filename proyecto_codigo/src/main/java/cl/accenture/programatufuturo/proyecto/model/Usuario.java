@@ -24,6 +24,7 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 
+
     public void setId(int id) {
         this.id = id;
     }
