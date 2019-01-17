@@ -35,21 +35,6 @@ public class PermisosDAO {
         }
     }
 
-    public void insertarPermisoEnRol(Permisos b, Rol rol) throws SinConexionException {
-
-        try {
-
-            PreparedStatement pstatementInsert = conexion.getConexion().prepareStatement("INSERT INTO rol(id,nombre) VALUES (?,?)");
-
-            pstatementInsert.setInt(1, rol.getId());
-            pstatementInsert.setString(2, b.getNombre());
-            pstatementInsert.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     //metodo obtener permiso
     public List<Permisos> obtenerPermisos() throws SinConexionException {
         List<Permisos> permisos = new ArrayList<Permisos>();

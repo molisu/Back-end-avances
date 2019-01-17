@@ -69,10 +69,12 @@ public class EstadoDAO {
         }
         return estados;
     }
+    //metodo buscar estado por id
+
     public List<Estado>buscarEstadoporId(int p)throws SinConexionException{
         List<Estado>estados=new ArrayList<Estado>();
         try {
-            final String SQL = "SELECT * FROM estado WHERE nombre=?";
+            final String SQL = "SELECT * FROM estado WHERE idEstado=?";
             PreparedStatement ps = conexion.getConexion().prepareStatement(SQL);
             ps.setInt(1, p);
             ResultSet rs = ps.executeQuery();
