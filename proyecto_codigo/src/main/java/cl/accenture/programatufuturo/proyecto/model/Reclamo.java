@@ -22,6 +22,9 @@ public class Reclamo {
         this.fecha = fecha;
     }
 
+    public Reclamo() {
+    }
+
     public int getId() {
         return id;
     }
@@ -54,4 +57,35 @@ public class Reclamo {
         return fecha;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 }
