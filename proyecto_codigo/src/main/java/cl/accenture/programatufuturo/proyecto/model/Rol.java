@@ -1,16 +1,18 @@
 package cl.accenture.programatufuturo.proyecto.model;
 
+import java.util.List;
+
 public class Rol {
     private int id;
     private String nombre;
+    private List<Permisos> permisos;
 
-    public Rol(int id, String nombre) {
+    public Rol(int id, String nombre, List<Permisos> permisos) {
         this.id = id;
         this.nombre = nombre;
+        this.permisos = permisos;
     }
     public Rol(){
-        this.id=0;
-        this.nombre="";
     }
 
     public int getId() {
@@ -29,5 +31,11 @@ public class Rol {
         this.nombre = nombre;
     }
 
+    public List<Permisos> getPermisos() {
+        return permisos;
+    }
 
+    public void setPermisos(List<Permisos> permisos) {
+        this.permisos = permisos;
+    }
 }
