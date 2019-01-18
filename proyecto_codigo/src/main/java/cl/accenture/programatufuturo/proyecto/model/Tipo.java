@@ -2,40 +2,40 @@ package cl.accenture.programatufuturo.proyecto.model;
 
 public class Tipo {
 
-    private Integer id;
+    private int id, sla;
     private String nombre;
-    private Integer sla;
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Tipo(){
+
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setSla(Integer sla) {
-        this.sla = sla;
-    }
-
-    public Tipo(Integer id, String nombre, Integer sla) {
+    public Tipo(int id, String nombre, int sla) {
         this.id = id;
         this.nombre = nombre;
         this.sla = sla;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getSla() {
+        return sla;
+    }
+
+    public void setSla(int sla) {
+        this.sla = sla;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public Integer getSla() {
-        return sla;
-    }
-    public Tipo(){
-
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }

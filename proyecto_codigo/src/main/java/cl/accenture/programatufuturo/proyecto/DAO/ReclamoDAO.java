@@ -27,7 +27,7 @@ public class ReclamoDAO {
 
         try {
 
-            PreparedStatement pstatementInsert = conexion.getConexion().prepareStatement("INSERT INTO Reclamo (Id, titulo, descripcion, fecha,region, tipoReclamo_Id, usuario_Id, estado_IdEstado)" + "VALUES (?,?,?,?,?,?,?,?)");
+            PreparedStatement pstatementInsert = conexion.getConexion().prepareStatement("INSERT INTO Reclamo (id, titulo, descripcion, fecha, region, tipoReclamo_Id, usuario_Id, estado_idEstado)" + "VALUES (?,?,?,?,?,?,?,?)");
 
             pstatementInsert.setInt(1,a.getId());
             pstatementInsert.setString(2,a.getTitulo());
@@ -85,7 +85,7 @@ public class ReclamoDAO {
         List<Reclamo> reclamos = new ArrayList<Reclamo>();
         try {
 
-            PreparedStatement pstatementSelect = conexion.getConexion().prepareStatement("SELECT * FROM Reclamo WHERE Tipo_Id=? ");
+            PreparedStatement pstatementSelect = conexion.getConexion().prepareStatement("SELECT * FROM Reclamo WHERE tipoReclamo_Id=? ");
             pstatementSelect.setInt(1, a.getId());
             ResultSet rs = pstatementSelect.executeQuery();
 

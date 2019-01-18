@@ -12,23 +12,24 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TipoDAO {
-    private Statement statement;
-    private PreparedStatement psInsertar;
+
     private Conexion conexion;
 
     public TipoDAO(Conexion conexion) {
         this.conexion = conexion;
     }
 
-    //metodo insertar reclamo
+    //metodo insertar (tipo)reclamo
 
 
-    public void insertarTiporeclamo(Tipo a) throws SinConexionException {
+    public void insertarTipoReclamo(Tipo a) throws SinConexionException {
         try {
-            PreparedStatement pstatementInsert = conexion.getConexion().prepareStatement("INSERT INTO tiporeclamo(Id,nombre,SLA");
+            PreparedStatement pstatementInsert = conexion.getConexion().prepareStatement("INSERT INTO TipoReclamo(id,nombre,sla");
             pstatementInsert.setInt(1, a.getId());
             pstatementInsert.setString(2, a.getNombre());
             pstatementInsert.setInt(3, a.getSla());
+
+            pstatementInsert.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
 
@@ -38,32 +39,34 @@ public class TipoDAO {
     //metodo para buscar tiporeclamo por id
 
 
-    public List<Tipo>buscartipoconid (Integer t) throws SinConexionException {
-        List<Tipo> tipos = new ArrayList<Tipo>();    //creo una lista y la inicializo como Arraylist
+    public Tipo buscarTipoConId (int t) throws SinConexionException {
+        Tipo tipo = new Tipo();
+
         try {
-            final String SQL = "SELECT * FROM tiporeclamo WHERE Id=?";
+            final String SQL = "SELECT * FROM TipoReclamo WHERE id=?";
             PreparedStatement ps = conexion.getConexion().prepareStatement(SQL);
             ps.setInt(1, t);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Tipo tipo = new Tipo();
+
                 tipo.setId(rs.getInt(1));
                 tipo.setNombre(rs.getString(2));
-                tipos.add(tipo);
+                tipo.setSla(rs.getInt(3));
+
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return tipos;
+        return tipo;
     }
 
 
     //metodo para buscar por nombre
 
-    public List<Tipo> buscarpornombre(String nombre) throws SinConexionException {
+    public List<Tipo> buscarPorNombre(String nombre) throws SinConexionException {
         List<Tipo> tipos = new ArrayList<Tipo>();
         try {
-            final String SQL = "SELECT * FROM tiporeclamo WHERE nombre=?";
+            final String SQL = "SELECT * FROM TipoReclamo WHERE nombre=?";
             PreparedStatement ps = conexion.getConexion().prepareStatement(SQL);
             ps.setString(1, nombre);
             ResultSet rs = ps.executeQuery();
@@ -84,10 +87,10 @@ public class TipoDAO {
     //metodo para ordenar por SLA
 
 
-    public List<Tipo> ordenarporsla() {
+    public List<Tipo> ordenarPorsSla() throws SinConexionException{
         List<Tipo> tipos = new ArrayList<Tipo>();
         try {
-            final String SQL = "SELECT * FROM tipoReclamo WHERE ORDER BY sla ASC";
+            final String SQL = "SELECT * FROM TipoReclamo WHERE ORDER BY sla ASC";
             PreparedStatement ps = conexion.getConexion().prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -99,8 +102,6 @@ public class TipoDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (SinConexionException e) {
-            e.printStackTrace();
         }
         return tipos;
     }
@@ -109,10 +110,10 @@ public class TipoDAO {
     //metodo para buscar por SLA
 
 
-    public List<Tipo> buscarporsla(Integer sla) throws SinConexionException {
+    public List<Tipo> buscarPorSla(int sla) throws SinConexionException {
         List<Tipo> tipos = new ArrayList<Tipo>();
         try {
-            final String SQL = "SELECT * FROM tiporeclamo WHERE SLA=?";
+            final String SQL = "SELECT * FROM TipoReclamo WHERE sla=?";
             PreparedStatement ps = conexion.getConexion().prepareStatement(SQL);
             ps.setInt(1, sla);
             ResultSet rs = ps.executeQuery();
@@ -133,10 +134,10 @@ public class TipoDAO {
     //metodo para ordenar por nombre
 
 
-    public List<Tipo> ordenarpornombre() {
+    public List<Tipo> ordenarPorNombre() throws SinConexionException{
         List<Tipo> tipos = new ArrayList<Tipo>();
         try {
-            final String SQL = "SELECT * FROM tipoReclamo WHERE ORDER BY nombre ASC";
+            final String SQL = "SELECT * FROM TipoReclamo WHERE ORDER BY nombre ASC";
             PreparedStatement ps = conexion.getConexion().prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -148,8 +149,6 @@ public class TipoDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (SinConexionException e) {
-            e.printStackTrace();
         }
         return tipos;
     }
@@ -157,20 +156,15 @@ public class TipoDAO {
     //lista todos los tipos
 
     public List<Tipo> obtenerAll() throws SinConexionException {
-
-
         List<Tipo> tipos = new ArrayList<Tipo>();
 
         try {
-
 
             final String SQL = "SELECT * FROM Tipo";
             PreparedStatement ps = this.conexion.getConexion().prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-
-
                 Tipo t = new Tipo();
 
                 // Asigno sus parametros al objeto previamente creado
@@ -178,7 +172,7 @@ public class TipoDAO {
                 t.setNombre(rs.getString(2));
                 t.setSla(rs.getInt(3));
 
-                // añado mi Rol con sus atributos ya ingresados en mi list
+                // añado mi Tipo con sus atributos ya ingresados en mi list
                 tipos.add(t);
 
             }
