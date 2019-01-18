@@ -4,7 +4,7 @@ import cl.accenture.programatufuturo.proyecto.exception.SinConexionException;
 import cl.accenture.programatufuturo.proyecto.model.Reclamo;
 import cl.accenture.programatufuturo.proyecto.model.Estado;
 import cl.accenture.programatufuturo.proyecto.model.Tipo;
-import cl.accenture.programatufuturo.proyecto.model.Usuario;
+
 
 
 
@@ -271,7 +271,7 @@ public class ReclamoDAO {
     }
 
     //ordena los reclamos por region de manera ascendente
-    //IMPORTANTE TAMBIEN REVISAR!!!
+
 
     public List<Reclamo> ordenarPorRegion()throws SinConexionException{
         List<Reclamo> reclamos= new ArrayList<Reclamo>();
@@ -307,7 +307,7 @@ public class ReclamoDAO {
     }
 
     // busca los reclamos hechos en la fecha ingresada
-    // REVISAR
+
 
     public List<Reclamo> buscarPorFecha(Date a) throws SinConexionException {
 
@@ -345,7 +345,7 @@ public class ReclamoDAO {
     }
 
     //busca los reclamos de acuerdo al estado ingresado
-    // Tambien revisar
+
 
 
     public List<Reclamo> buscarPorEstado(Estado a) throws SinConexionException {
@@ -383,10 +383,59 @@ public class ReclamoDAO {
         return reclamos;
     }
 
+    // permite cambiar el estado de un reclamo
 
-    public void cambiarEstado(Estado a) throws SinConexionException{
+    public void cambiarEstado (int idParaBuscar, int idModificado) throws SinConexionException {
+        try {
 
+
+            PreparedStatement pstatementUpdate = conexion.getConexion().prepareStatement("UPDATE Reclamo SET estado_idEstado= ? WHERE id= ?;");
+
+            pstatementUpdate.setInt(1, idModificado);
+            pstatementUpdate.setInt(2, idParaBuscar);
+            pstatementUpdate.executeUpdate();
+
+            int resultUpdate = pstatementUpdate.executeUpdate();
+
+            System.out.println(resultUpdate);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public List<Reclamo> ordenarPorEstado(Estado a)throws SinConexionException{
+        List<Reclamo> reclamos= new ArrayList<Reclamo>();
+
+        try{
+            PreparedStatement pstatementSelect = conexion.getConexion().prepareStatement("SELECT * FROM Reclamo WHERE ORDER BY estado_idEstado ASC ");
+            ResultSet rs = pstatementSelect.executeQuery();
+
+            while (rs.next()) {
+
+                Reclamo reclamo = new Reclamo();
+                reclamo.setId(rs.getInt(1));
+                reclamo.setTitulo(rs.getString(2));
+                reclamo.setDescripcion(rs.getString(3));
+                reclamo.setFecha(rs.getDate(4));
+                reclamo.setRegion(rs.getString(5));
+
+                TipoDAO tipoDao = new TipoDAO(this.conexion);
+                EstadoDAO estadoDao = new EstadoDAO(this.conexion);
+                UsuarioDAO usuarioDao = new UsuarioDAO(this.conexion);
+
+                reclamo.setTipo((Tipo) tipoDao.buscartipoconid((rs.getInt(6))));
+                reclamo.setUsuario(usuarioDao.obtenerPorId(rs.getInt(7)));
+                reclamo.setEstado((Estado) estadoDao.buscarEstadoporId(rs.getInt(8)));
+                reclamos.add(reclamo);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reclamos;
 
     }
+
 
 }
