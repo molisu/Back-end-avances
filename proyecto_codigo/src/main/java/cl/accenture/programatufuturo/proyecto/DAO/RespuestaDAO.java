@@ -48,7 +48,7 @@ public class RespuestaDAO {
     }
 
     // Ordenar por Fecha, retorno lista ordenada, no recibo nada.
-    public List<Respuesta> ordenarPorFecha (){
+    public List<Respuesta> ordenarPorFechaASC ()throws SinConexionException{
         List<Respuesta> respuestas = new ArrayList<Respuesta>();
 
         try{
@@ -62,7 +62,7 @@ public class RespuestaDAO {
 
                 res.setId(rs.getInt(1));
                 res.setComentario(rs.getString(2));
-                res.setFecha(rs.getDate(4));
+                res.setFecha(rs.getDate(3));
 
                 ReclamoDAO rDAO = new ReclamoDAO(this.conexion);
                 UsuarioDAO uDAO = new UsuarioDAO(this.conexion);
@@ -74,10 +74,56 @@ public class RespuestaDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (SinConexionException e) {
-            e.printStackTrace();
         }
         return respuestas;
     }
 
+    //Obetener lista de Respuestas, retornamos una List de Respuestas, recibo el id del reclamo del que quiero respuestas.
+    public List<Respuesta> obtenerRespPorIdReclamo(int idReclamo) throws SinConexionException {
+
+        // Creo mi List y la inicializo como una ArrayList
+        List<Respuesta> resp = new ArrayList<Respuesta>();
+
+        try {
+
+            // Selecciono todas las columnas, de la tabla Respuestas
+            final String SQL = "SELECT * FROM  WHERE reclamo_Id = ? ORDER BY fecha ASC";
+
+            // Creo mi PreparedStatement, con la conexion con mi SQL
+            PreparedStatement ps = this.conexion.getConexion().prepareStatement(SQL);
+
+            // aqui ingreso el valor de mi signo de interrogacion, es decir '?'
+            // será igual a id que es el int que me ingresan (id del Usuario)
+            ps.setInt(1, idReclamo);
+
+            // en el ResultSet ejecuto la Query del ps.
+            ResultSet rs = ps.executeQuery();
+
+            // Mientras rs, siga teniendo respuestas, entonces
+            while (rs.next()) {
+
+                // creo un nuevo usuario SIN PARAMETROS
+                Respuesta r = new Respuesta();
+
+                // Asigno sus parametros al objeto previamente creado
+                r.setId(rs.getInt(1));
+                r.setComentario(rs.getString(2));
+                r.setFecha(rs.getDate(3));
+
+                ReclamoDAO rDAO = new ReclamoDAO(this.conexion);
+                UsuarioDAO uDAO = new UsuarioDAO(this.conexion);
+
+                r.setReclamo(rDAO.buscarPorId(rs.getInt(4)));
+                r.setUsuario(uDAO.obtenerPorId(rs.getInt(5)));
+
+
+                // añado mi Respuesta con sus atributos ya ingresados en mi list
+                resp.add(r);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resp;
+    }
 }

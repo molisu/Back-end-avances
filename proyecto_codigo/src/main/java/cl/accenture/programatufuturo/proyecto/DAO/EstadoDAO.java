@@ -11,8 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EstadoDAO {
-    private Statement statement;
-    private PreparedStatement psInsertar;
+
     private Conexion conexion;
 
     public EstadoDAO(Conexion conexion) {
@@ -21,7 +20,7 @@ public class EstadoDAO {
 
     public void agregarEstado(Estado estado) throws SinConexionException {
         try {
-            final String SQL = "INSERT INTO estado(idEstado,nombre) VALUES(?,?)";
+            final String SQL = "INSERT INTO Estado(idEstado,nombre) VALUES(?,?)";
             PreparedStatement ps = conexion.getConexion().prepareStatement(SQL);
             ps.setInt(1, estado.getId());
             ps.setString(2, estado.getNombre());
@@ -29,14 +28,13 @@ public class EstadoDAO {
 
         } catch (SQLException o) {
             o.printStackTrace();
-
         }
     }
 
-    public List<Estado> obtenerestados() throws SinConexionException {
+    public List<Estado> obtenerEstados() throws SinConexionException {
         List<Estado> estados = new ArrayList<Estado>();
         try {
-            final String SQL = "SELECT * from estado";
+            final String SQL = "SELECT * from Estado";
             PreparedStatement ps = conexion.getConexion().prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -56,7 +54,7 @@ public class EstadoDAO {
     public List<Estado> buscarEstadopornombre(String t) throws SinConexionException {
         List<Estado> estados = new ArrayList<Estado>();
         try {
-            final String SQL = "SELECT * FROM estado WHERE nombre=?";
+            final String SQL = "SELECT * FROM Estado WHERE nombre=?";
             PreparedStatement ps = conexion.getConexion().prepareStatement(SQL);
             ps.setString(1, t);
             ResultSet rs = ps.executeQuery();
@@ -71,26 +69,24 @@ public class EstadoDAO {
         }
         return estados;
     }
-    //metodo buscar estado por id
 
-    public List<Estado> buscarEstadoporId(int p) throws SinConexionException {
-        List<Estado> estados = new ArrayList<Estado>();
+    //metodo buscar estado por id
+    public Estado buscarEstadoporId(int p) throws SinConexionException {
+        Estado estado = new Estado();
+
         try {
-            final String SQL = "SELECT * FROM estado WHERE idEstado=?";
+            final String SQL = "SELECT * FROM Estado WHERE idEstado=?";
             PreparedStatement ps = conexion.getConexion().prepareStatement(SQL);
             ps.setInt(1, p);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Estado estado = new Estado();
                 estado.setId(rs.getInt(1));
                 estado.setNombre(rs.getString(2));
-                estados.add(estado);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return estados;
-
+        return estado;
     }
 
     // no retorna anda, modifica el id de un Estado
@@ -104,8 +100,6 @@ public class EstadoDAO {
             ps.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (SinConexionException e) {
             e.printStackTrace();
         }
     }
