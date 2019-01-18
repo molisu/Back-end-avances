@@ -143,12 +143,11 @@ public class UsuarioDAO {
         return usuarios;
     }
 
-    // Buscar un Usuario por su email, retorno una Lista de Usuarios
+    // Buscar un Usuario por su email
     // recibo un String que será el email del Usuario
-    public List<Usuario> buscarUsuarioPorEmail (String email) throws SinConexionException {
+    public Usuario buscarUsuarioPorEmail (String email) throws SinConexionException {
 
-        // Creo mi lista, de tipo Array porque quiero >:)
-        List<Usuario> usuarios = new ArrayList<Usuario>();
+        Usuario user = new Usuario();
 
         try {
             // Selecciono todas las columnas de la tabla Usuario, donde
@@ -167,7 +166,7 @@ public class UsuarioDAO {
             while (rs.next()) {
 
                 // Creo objeto Usuario
-                Usuario user = new Usuario();
+
 
                 // y le entrego los valores que corresponden a sus atributos
                 user.setId(rs.getInt(1));
@@ -185,14 +184,14 @@ public class UsuarioDAO {
 
                 user.setRol(rDAO.obtenerPorId(rs.getInt(11)));
 
-                // añado añado el Usario a la list
-                usuarios.add(user);
+
+
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return usuarios;
+        return user;
     }
 
     // Obtener Usuario por su id, retorno un Usuario

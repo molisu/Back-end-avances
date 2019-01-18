@@ -65,9 +65,9 @@ public class ReclamoDAO {
             EstadoDAO estadoDao = new EstadoDAO(this.conexion);
             UsuarioDAO usuarioDao = new UsuarioDAO(this.conexion);
 
-            reclamo.setTipo((Tipo) tipoDao.buscartipoconid((rs.getInt(6))));
+            reclamo.setTipo(tipoDao.buscarTipoConId((rs.getInt(6))));
             reclamo.setUsuario(usuarioDao.obtenerPorId(rs.getInt(7)));
-            reclamo.setEstado((Estado) estadoDao.buscarEstadoporId(rs.getInt(8)));
+            reclamo.setEstado(estadoDao.buscarEstadoporId(rs.getInt(8)));
 
 
 
@@ -102,9 +102,9 @@ public class ReclamoDAO {
                 EstadoDAO estadoDao = new EstadoDAO(this.conexion);
                 UsuarioDAO usuarioDao = new UsuarioDAO(this.conexion);
 
-                reclamo.setTipo((Tipo) tipoDao.buscartipoconid((rs.getInt(6))));
+                reclamo.setTipo(tipoDao.buscarTipoConId((rs.getInt(6))));
                 reclamo.setUsuario(usuarioDao.obtenerPorId(rs.getInt(7)));
-                reclamo.setEstado((Estado) estadoDao.buscarEstadoporId(rs.getInt(8)));
+                reclamo.setEstado(estadoDao.buscarEstadoporId(rs.getInt(8)));
                 reclamos.add(reclamo);
 
             }
@@ -140,9 +140,9 @@ public class ReclamoDAO {
                 EstadoDAO estadoDao = new EstadoDAO(this.conexion);
                 UsuarioDAO usuarioDao = new UsuarioDAO(this.conexion);
 
-                reclamo.setTipo((Tipo) tipoDao.buscartipoconid((rs.getInt(6))));
+                reclamo.setTipo(tipoDao.buscarTipoConId((rs.getInt(6))));
                 reclamo.setUsuario(usuarioDao.obtenerPorId(rs.getInt(7)));
-                reclamo.setEstado((Estado) estadoDao.buscarEstadoporId(rs.getInt(8)));
+                reclamo.setEstado(estadoDao.buscarEstadoporId(rs.getInt(8)));
                 reclamos.add(reclamo);
 
             }
@@ -178,9 +178,9 @@ public class ReclamoDAO {
                 EstadoDAO estadoDao = new EstadoDAO(this.conexion);
                 UsuarioDAO usuarioDao = new UsuarioDAO(this.conexion);
 
-                reclamo.setTipo((Tipo) tipoDao.buscartipoconid((rs.getInt(6))));
+                reclamo.setTipo(tipoDao.buscarTipoConId((rs.getInt(6))));
                 reclamo.setUsuario(usuarioDao.obtenerPorId(rs.getInt(7)));
-                reclamo.setEstado((Estado) estadoDao.buscarEstadoporId(rs.getInt(8)));
+                reclamo.setEstado(estadoDao.buscarEstadoporId(rs.getInt(8)));
                 reclamos.add(reclamo);
 
             }
@@ -218,9 +218,9 @@ public class ReclamoDAO {
                 EstadoDAO estadoDao = new EstadoDAO(this.conexion);
                 UsuarioDAO usuarioDao = new UsuarioDAO(this.conexion);
 
-                reclamo.setTipo((Tipo) tipoDao.buscartipoconid((rs.getInt(6))));
+                reclamo.setTipo(tipoDao.buscarTipoConId((rs.getInt(6))));
                 reclamo.setUsuario(usuarioDao.obtenerPorId(rs.getInt(7)));
-                reclamo.setEstado((Estado) estadoDao.buscarEstadoporId(rs.getInt(8)));
+                reclamo.setEstado(estadoDao.buscarEstadoporId(rs.getInt(8)));
                 reclamos.add(reclamo);
 
             }
@@ -257,9 +257,9 @@ public class ReclamoDAO {
                 EstadoDAO estadoDao = new EstadoDAO(this.conexion);
                 UsuarioDAO usuarioDao = new UsuarioDAO(this.conexion);
 
-                reclamo.setTipo((Tipo) tipoDao.buscartipoconid((rs.getInt(6))));
+                reclamo.setTipo(tipoDao.buscarTipoConId((rs.getInt(6))));
                 reclamo.setUsuario(usuarioDao.obtenerPorId(rs.getInt(7)));
-                reclamo.setEstado((Estado) estadoDao.buscarEstadoporId(rs.getInt(8)));
+                reclamo.setEstado(estadoDao.buscarEstadoporId(rs.getInt(8)));
                 reclamos.add(reclamo);
 
             }
@@ -293,9 +293,9 @@ public class ReclamoDAO {
                 EstadoDAO estadoDao = new EstadoDAO(this.conexion);
                 UsuarioDAO usuarioDao = new UsuarioDAO(this.conexion);
 
-                reclamo.setTipo((Tipo) tipoDao.buscartipoconid((rs.getInt(6))));
+                reclamo.setTipo(tipoDao.buscarTipoConId((rs.getInt(6))));
                 reclamo.setUsuario(usuarioDao.obtenerPorId(rs.getInt(7)));
-                reclamo.setEstado((Estado) estadoDao.buscarEstadoporId(rs.getInt(8)));
+                reclamo.setEstado(estadoDao.buscarEstadoporId(rs.getInt(8)));
                 reclamos.add(reclamo);
 
             }
@@ -331,9 +331,9 @@ public class ReclamoDAO {
                 EstadoDAO estadoDao = new EstadoDAO(this.conexion);
                 UsuarioDAO usuarioDao = new UsuarioDAO(this.conexion);
 
-                reclamo.setTipo((Tipo) tipoDao.buscartipoconid((rs.getInt(6))));
+                reclamo.setTipo(tipoDao.buscarTipoConId((rs.getInt(6))));
                 reclamo.setUsuario(usuarioDao.obtenerPorId(rs.getInt(7)));
-                reclamo.setEstado((Estado) estadoDao.buscarEstadoporId(rs.getInt(8)));
+                reclamo.setEstado(estadoDao.buscarEstadoporId(rs.getInt(8)));
                 reclamos.add(reclamo);
 
             }
@@ -370,9 +370,9 @@ public class ReclamoDAO {
                 EstadoDAO estadoDao = new EstadoDAO(this.conexion);
                 UsuarioDAO usuarioDao = new UsuarioDAO(this.conexion);
 
-                reclamo.setTipo((Tipo) tipoDao.buscartipoconid((rs.getInt(6))));
+                reclamo.setTipo(tipoDao.buscarTipoConId((rs.getInt(6))));
                 reclamo.setUsuario(usuarioDao.obtenerPorId(rs.getInt(7)));
-                reclamo.setEstado((Estado) estadoDao.buscarEstadoporId(rs.getInt(8)));
+                reclamo.setEstado(estadoDao.buscarEstadoporId(rs.getInt(8)));
                 reclamos.add(reclamo);
 
             }
@@ -423,7 +423,7 @@ public class ReclamoDAO {
                 EstadoDAO estadoDao = new EstadoDAO(this.conexion);
                 UsuarioDAO usuarioDao = new UsuarioDAO(this.conexion);
 
-                reclamo.setTipo((Tipo) tipoDao.buscartipoconid((rs.getInt(6))));
+                reclamo.setTipo((Tipo) tipoDao.buscarTipoConId((rs.getInt(6))));
                 reclamo.setUsuario(usuarioDao.obtenerPorId(rs.getInt(7)));
                 reclamo.setEstado((Estado) estadoDao.buscarEstadoporId(rs.getInt(8)));
                 reclamos.add(reclamo);
