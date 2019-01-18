@@ -153,6 +153,40 @@ public class TipoDAO {
         }
         return tipos;
     }
+
+    //lista todos los tipos
+
+    public List<Tipo> obtenerAll() throws SinConexionException {
+
+
+        List<Tipo> tipos = new ArrayList<Tipo>();
+
+        try {
+
+
+            final String SQL = "SELECT * FROM Tipo";
+            PreparedStatement ps = this.conexion.getConexion().prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+
+                Tipo t = new Tipo();
+
+                // Asigno sus parametros al objeto previamente creado
+                t.setId(rs.getInt(1));
+                t.setNombre(rs.getString(2));
+                t.setSla(rs.getInt(3));
+
+                // añado mi Rol con sus atributos ya ingresados en mi list
+                tipos.add(t);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tipos;
+    }
 }
 
 
