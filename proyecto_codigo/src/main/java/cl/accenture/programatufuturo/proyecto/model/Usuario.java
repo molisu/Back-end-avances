@@ -10,18 +10,19 @@ public class Usuario {
 
     public Usuario(){}
 
-    public Usuario(int id, int telefono, String nombre, String email, String contraseña, String nacionalidad, String rut, String genero, Date ultimoLogin, Date fechaNac, Rol rol) {
+    public Usuario(int id, String nombre, String email, String contraseña, Date ultimoLogin, Date fechaNac, int telefono,String nacionalidad, String rut, String genero, Rol rol) {
         this.id = id;
         this.nombre = nombre;
-        this.rut = rut;
-        this.telefono = telefono;
         this.email = email;
-        this.nacionalidad = nacionalidad;
-        this.genero = genero;
+        this.contraseña = contraseña;
         this.ultimoLogin = ultimoLogin;
         this.fechaNac = fechaNac;
+        this.telefono = telefono;
+        this.nacionalidad = nacionalidad;
+        this.rut = rut;
+        this.genero = genero;
         this.rol = rol;
-        this.contraseña = contraseña;
+
     }
 
 

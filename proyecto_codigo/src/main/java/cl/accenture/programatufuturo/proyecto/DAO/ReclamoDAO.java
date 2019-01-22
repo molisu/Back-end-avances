@@ -27,7 +27,9 @@ public class ReclamoDAO {
 
         try {
 
-            PreparedStatement pstatementInsert = conexion.getConexion().prepareStatement("INSERT INTO Reclamo (id, titulo, descripcion, fecha, region, tipoReclamo_Id, usuario_Id, estado_idEstado)" + "VALUES (?,?,?,?,?,?,?,?)");
+            PreparedStatement pstatementInsert = conexion.getConexion().prepareStatement(
+                    "INSERT INTO Reclamo (id, titulo, descripcion, fecha, region, tipoReclamo_Id, usuario_Id, estado_idEstado)"
+                            + "VALUES (?,?,?,?,?,?,?,?)");
 
             pstatementInsert.setInt(1,a.getId());
             pstatementInsert.setString(2,a.getTitulo());
@@ -192,9 +194,6 @@ public class ReclamoDAO {
     }
 
     // ordena los reclamos por fecha de forma ascendente
-    //no recibe nada, ya que los ordena
-
-
 
     public List<Reclamo> ordenarPorFechaASC() throws SinConexionException{
 
@@ -403,6 +402,9 @@ public class ReclamoDAO {
             e.printStackTrace();
         }
     }
+
+    // ordena los reclamos de acuerdo al estado
+
     public List<Reclamo> ordenarPorEstado(Estado a)throws SinConexionException{
         List<Reclamo> reclamos= new ArrayList<Reclamo>();
 
