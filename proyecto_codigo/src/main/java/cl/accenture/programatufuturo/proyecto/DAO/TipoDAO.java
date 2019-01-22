@@ -167,12 +167,10 @@ public class TipoDAO {
             while (rs.next()) {
                 Tipo t = new Tipo();
 
-                // Asigno sus parametros al objeto previamente creado
+
                 t.setId(rs.getInt(1));
                 t.setNombre(rs.getString(2));
                 t.setSla(rs.getInt(3));
-
-                // añado mi Tipo con sus atributos ya ingresados en mi list
                 tipos.add(t);
 
             }

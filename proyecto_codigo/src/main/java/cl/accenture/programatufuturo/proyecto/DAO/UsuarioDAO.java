@@ -22,13 +22,15 @@ public class UsuarioDAO {
         this.conexion = conexion;
     }
 
+
+
     // Almacenar Usuario, no retorna nada. Recibe un Usuario
     public void almacenarUsuario (Usuario u) throws SinConexionException{
         try{
 
             // en mi SQL hago un INSERT TO, y VALUES, con signos de interrogacion en los valores de las columnas
             // y a continuación les dadamos el valor
-            final String SQL = "INSERT INTO Usuario(id, nombre, email, contraseña, ultimoLogin, fechaNac, telefono, nacionalidad, rut, genero, rol_Id) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            final String SQL = "INSERT INTO Usuario(Id, Nombre, email, contraseña, ultimoLogin, fechaDeNacimiento, telefono, nacionalidad, rut, genero, Rol_Id) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement ps = conexion.getConexion().prepareStatement(SQL);
 
