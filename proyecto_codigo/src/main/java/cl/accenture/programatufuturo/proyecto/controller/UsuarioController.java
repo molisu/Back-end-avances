@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
+@CrossOrigin(origins="*")
 
 public class UsuarioController {
     Conexion conexion = new Conexion();
 
-    @PostMapping  ("/almacenarUsuario")
+    @PostMapping("/almacenarUsuario")
     public void setUsuario(@RequestBody Usuario usuario) {
         try {
             UsuarioDAO dao = new UsuarioDAO(conexion);
@@ -24,4 +25,16 @@ public class UsuarioController {
         }
     }
 
+    @PostMapping("/login")
+    public Usuario Login(@RequestBody Usuario usuario) {
+        try {
+            UsuarioDAO dao = new UsuarioDAO(conexion);
+            dao.login(usuario.getNombre(),usuario.getContraseña());
+            return (Usuario) dao.buscarUsuarioPorNombre(usuario.getNombre());
+        } catch (SinConexionException e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
 }
+

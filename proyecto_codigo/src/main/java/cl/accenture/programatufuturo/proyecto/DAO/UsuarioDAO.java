@@ -59,14 +59,14 @@ public class UsuarioDAO {
     }
 
     // Login para ingresar, retorna un boolean, recibe un Usuario
-    public boolean login(String usuario, String contraseña)throws SinConexionException {
+    public boolean login(String usuario, String contrasena)throws SinConexionException {
 
         try{
             final String SQL = "SELECT * FROM usuario WHERE nombre=? AND contraseña=?";
 
             PreparedStatement ps = conexion.getConexion().prepareStatement(SQL);
             ps.setString(1, usuario);
-            ps.setString(2, contraseña);
+            ps.setString(2, contrasena);
 
             ResultSet rs = ps.executeQuery();
 
@@ -210,6 +210,47 @@ public class UsuarioDAO {
             // aqui ingreso el valor de mi signo de interrogacion, es decir '?'
             // será igual a id que es el int que me ingresan (id del Usuario)
             ps.setInt(1, id);
+
+            // respuesta almacenada en una variable, de la Query ejecutada en ps.
+            ResultSet rs = ps.executeQuery();
+
+            // Mientras sigan habíendo respuestas
+            while (rs.next()) {
+
+                // A user entrego los valores que corresponden a sus atributos
+                user.setId(rs.getInt(1));
+                user.setNombre(rs.getString(2));
+                user.setEmail(rs.getString(3));
+                user.setContraseña(rs.getString(4));
+                user.setUltimoLogin(rs.getDate(5));
+                user.setFechaNac(rs.getDate(6));
+                user.setTelefono(rs.getInt(7));
+                user.setNacionalidad(rs.getString(8));
+                user.setRut(rs.getString(9));
+                user.setGenero(rs.getString(10));
+
+                RolDAO rDAO = new RolDAO(this.conexion);
+
+                user.setRol(rDAO.obtenerPorId(rs.getInt(11)));
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public Usuario obtenerPorNombre (String nombre) throws SinConexionException {
+        Usuario user = new Usuario();
+
+        try {
+
+            final String SQL = "SELECT * FROM Usuario WHERE nombre = ?";
+            PreparedStatement ps = this.conexion.getConexion().prepareStatement(SQL);
+
+
+            ps.setString(1, nombre);
 
             // respuesta almacenada en una variable, de la Query ejecutada en ps.
             ResultSet rs = ps.executeQuery();
