@@ -30,7 +30,7 @@ public class UsuarioController {
         try {
             UsuarioDAO dao = new UsuarioDAO(conexion);
             dao.login(usuario.getNombre(),usuario.getContraseña());
-            return (Usuario) dao.buscarUsuarioPorNombre(usuario.getNombre());
+            return dao.obtenerPorNombre(usuario.getNombre());
         } catch (SinConexionException e) {
             e.printStackTrace();
         }
