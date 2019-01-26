@@ -12,7 +12,7 @@ public class Conexion {
         Connection conexion = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/proyecto", "root", "33forever");
+            conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/proyecto", "root", "Pamela14");
             System.out.println("resulto! :)");
             Statement s = conexion.createStatement();
             ResultSet rs = s.executeQuery("select * from Reclamo");
